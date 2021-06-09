@@ -1,0 +1,103 @@
+*{
+    /* background-color:#d3d2d2; */
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav > ul {
+    background-color: #242526;
+    list-style-type: none;
+    overflow: hidden;
+}
+nav > ul > li {
+    float: left;
+}
+nav > ul > li >a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;   
+    background-color: #242526;
+}
+
+nav > ul > li >a:hover {
+    background-color: #111;
+}
+
+.banner {
+    padding: 50px;
+   background-color:  #6e7172;
+   display: flex;
+    justify-content: space-between;
+}
+
+.welcome{
+    flex:1;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.details{
+    flex:1;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+ /* padding-right: 50px; */
+  color: white;
+}
+
+.details > table {
+    border-spacing: 10px;
+}
+ 
+.btnprofile{
+    background-color: #6e7172;
+    border: 2px solid white;
+    padding: 2px 25px;
+    color: white;
+    font-weight: 700;
+    border-radius: 8px;
+}
+main{
+    background-color:#d3d2d2;
+}
+.container {
+    display: flex;
+}
+
+.card{
+    flex:1;
+    margin:20px;
+    background-color: white;
+    
+    border-radius: 25px;
+}
+
+.heading {
+    padding : 16px;
+    border-bottom: 1px solid #3b3b3b;
+    box-shadow: 0 2px 2px -2px gray;
+    display:flex;
+    text-align: center;
+}
+.heading > h4{
+    flex:2;
+    display: inline;
+}
+.heading>button{
+flex:1;
+}
+.lists > ul{
+    padding : 16px;
+    list-style-type: none;
+
+}
+
+.lists > ul> li {
+    /* text-decoration: none; */
+    padding:8px;
+}
