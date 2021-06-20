@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        /* .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active,
+        .collapsible:hover {
+            background-color: #555;
+        } */
+
+        .content {
+             /* padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;  */
+             display: none; 
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+    </div>
+
+    <script>
+        var html = "<ul>";
+        $.getJSON("data.json", function (json) {
+
+            var data = json.targetGroupResponseMap;
+
+            printAllVals(json);
+
+            html +="</ul>"
+            $("#container").append(html);
+            console.log(html);
+
+            var coll = document.getElementsByClassName("collapsible");
+
+            for (var a = 0; a < coll.length; a++) {
+
+                coll[a].addEventListener("click", function () {
+
+                    var content = this.nextElementSibling;
+
+                    if (content.style.display == "block")
+                        content.style.display = "none";
+                    else
+                        content.style.display = "block";
+
+                    });
+            }
+
+        });
+
+        function printAllVals(obj) {
+            for (let k in obj) {
+
+                if (typeof obj[k] === "object") {
+
+                    if (k !== "0") 
+                        html += "<li><h3 class='collapsible' > " + k + " </h3> <ul class='content' > "
+
+                    printAllVals(obj[k])
+                    if (k !== "0")
+                        html += "</ul></li>"
+
+                } else {
+                    html += "<li>" + obj[k] + "</li>";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
