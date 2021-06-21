@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        /* .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active,
+        .collapsible:hover {
+            background-color: #555;
+        } */
+
+        .content {
+            /* padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1; */
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+    </div>
+
+
+
+    <script>
+        $.getJSON("data.json", function (json) {
+            // console.log(data);
+            var html = "";
+
+            html += " <h3 class='collapsible' > structure </h3><ul class='content' >  ";
+
+            var data = json.targetGroupResponseMap;
+            // console.log(data.targetGroupResponseMap);
+            var keys1 = Object.keys(data);
+            var data1 = Object.values(data);
+            // console.log(Object.keys(data1));
+            for (var i = 0; i < keys1.length; i++) {
+                html += "<li>";
+                html += "<h3 class= 'collapsible' >" + keys1[i] + " </h3>";
+                var keys2 = Object.keys(data1[i]);
+                //   console.log(keys2);
+                var data2 = Object.values(data1[i]);
+
+                html += "<ul  class='content'>";
+                for (var j = 0; j < keys2.length; j++) {
+                    html += "<h3 class = ' collapsible' > " + keys2[j] + "</h3> <ul class ='content' > ";
+                    // console.log(data2[j][0]);
+                    var object = data2[j][0];
+                    if (data2[j].length > 0) {
+                        // console.log(object);
+
+                        var keys3 = Object.keys(data2[j][0]);
+                        var data3 = Object.values(data2[j][0]);
+                        for (var k = 0; k < keys3.length; k++) {
+                            html += "<li>" + keys3[k] + " : " + data3[k] + "</li>"
+                        }
+                    }
+                    html += "</ul>"
+                }
+
+                html += "</ul> "
+
+                html += "</li>";
+            }
+
+
+            html += "</ul>";
+
+            $("#container").append(html);
+            console.log(html);
+
+            var coll = document.getElementsByClassName("collapsible");
+            // console.log(coll);
+            var a;
+
+            for (a = 0; a < coll.length; a++) {
+                //     // console.log("event listener added");
+                coll[a].addEventListener("click", function () {
+                    //         // console.log("clicked" + coll[a]);
+                    //         this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    // console.log(content)
+                    if (content.style.display == "block")
+                        content.style.display = "none";
+                    else
+                        content.style.display = "block";
+                    //         if (content.style.maxHeight) {
+                    //             content.style.maxHeight = null;
+                    //         } else {
+                    //             content.style.maxHeight = content.scrollHeight + "px";
+                    //         }
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>
