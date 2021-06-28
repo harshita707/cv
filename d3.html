@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="container" style="padding-left: .5rem;">
+    </div>
+
+    <script>
+        $.getJSON("data.json", function (json) {
+
+            for (let k in json[Object.keys(json)[0]]) {
+                var region = d3.select("#container").append('li');
+                var x = region.append("div").append("p").attr('class','collapsibleList').text(k);
+
+                printNext(json[Object.keys(json)[0]][k], region);
+            }
+
+
+
+        });
+
+        function printNext(obj, ele){
+            var ele2 = ele.append('ul').attr('class', 'contentCollapsibleList');
+            for(let k in obj){
+                if(k.length >1){
+                    var ele3= ele2.append('li');
+                   var ele4= ele3.append("div").attr('style','display:flex');
+                   ele4.append('input').attr('type','checkbox').attr('value',k).attr('onclick','checkboxClick(this.value)');
+                   ele4.append('p').attr('class','collapsibleList').attr('style','direction:rtl').text(k);
+                   printNext(obj[k] , ele3)
+                } else{
+                    var ele5=ele2.append('div').attr('class','instanceCollapsibleList');
+                    ele5.append('input').attr('type','checkbox').attr('name',obj[k].targetName).attr('value',obj[k].targetName).attr('onclick','checkboxClick(this.value)');
+                    ele5.append('label').attr('for',obj[k].targetName).text(obj[k].targetName)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
